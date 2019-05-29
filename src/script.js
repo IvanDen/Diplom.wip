@@ -1,25 +1,18 @@
 $(document).ready(function() {
     showPopup();
-    // slider();
     DropMenu();
-    // UpdateSliders();
+    UpdateSliders();
     InputActive();
     SendFormAll();
 
 });
 
-/*$(window).resize(function() {
+$(window).resize(function() {
     UpdateSliders();
-});*/
+});
 
 function Slider(sliderListWrap, onDisplay, toElem)
 {
-    if (sliderListWrap.length == 0)
-        return;
-
-    var minWidthSlide = 200;
-    var maxWidthSlide = 410;
-
     //IE
     toElem = toElem === undefined ? -1 : toElem;
 
@@ -28,30 +21,25 @@ function Slider(sliderListWrap, onDisplay, toElem)
     var count = $('.'+sliderList+' > *').length;
     console.log("count: " + count);
 
-    var wrapWidth = $('.'+sliderListWrap+' .js-full-wrap').outerWidth();
-    //var wrapWidth = $('.'+sliderListWrap+' .js-full-wrap').width();
+    var wrapWidth = $('.'+sliderListWrap+' .js-full-wrap').width();
     console.log("wrapWidth: " + wrapWidth);
 
-    var marginRight = $('.js-slide').css('margin-right');
-    marginRight = Number(marginRight.replace('px', ''));
+    var marginRight = $('.'+sliderList+' > *').css('margin-right');
+    var marginLeft = $('.'+sliderList+' > *').css('margin-left');
+
     console.log('marginRight : ' + marginRight);
+    console.log('marginLeft : ' + marginLeft);
 
+    marginRight = Number(marginRight.replace('px', ''));
+    marginLeft = Number(marginLeft.replace('px', ''));
 
-    var elemWidth = ((wrapWidth / onDisplay) + marginRight);
-
-
-    while (elemWidth > maxWidthSlide)
-    {
-        onDisplay++;
-        elemWidth = wrapWidth / onDisplay;
-    }
-
-    while (elemWidth < minWidthSlide)
+    var elemWidth = wrapWidth / onDisplay;
+    console.log('1 elemWidth : ' + elemWidth);
+    while (elemWidth < 200)
     {
         onDisplay--;
         elemWidth = wrapWidth / onDisplay;
     }
-
 
     console.log("elemWidth: " + elemWidth);
 
@@ -61,7 +49,7 @@ function Slider(sliderListWrap, onDisplay, toElem)
     var maxShift = count - onDisplay;
     console.log("maxShift: " + sliderWidth);
 
-    $('.'+sliderList+' > *').outerWidth(elemWidth);
+    $('.'+sliderList+' > *').width(elemWidth - (marginRight + marginLeft));
 
     $('.'+sliderList).width(sliderWidth);
 
@@ -81,7 +69,6 @@ function Slider(sliderListWrap, onDisplay, toElem)
     var pointsCount = 1 + count - onDisplay;
     console.log("pointsCount: " + pointsCount);
 
-    // if ($('.js-points').is(":visible")) {
 
     $('.'+sliderListWrap).find('.js-points > *').remove();
     for (var i = 0; i < pointsCount; i++)
@@ -91,15 +78,13 @@ function Slider(sliderListWrap, onDisplay, toElem)
         $('.'+sliderListWrap).find('.js-points').append(pointTemplate);
     }
     $('.'+sliderListWrap).find('.js-points > *').eq(currentShift).addClass('active');
-    // }
-
 
 
     //Сдвиг первоначальный
     $('.'+sliderList).css('margin-left', currentShift * -elemWidth - currentShift);
     console.log('margin-left: ' + (currentShift * -elemWidth - currentShift));
 
-    $('.'+sliderListWrap+' .js-list-wrap').width(wrapWidth);
+    $('.'+sliderListWrap+' .slider-list-wrap').width(wrapWidth);
 
     $('.' + sliderListWrap + ' .js-slide-to-left, ' + '.' + sliderListWrap + ' .js-slide-to-right').off('click');
     $('.' + sliderListWrap + ' .js-slide-to-left, ' + '.' + sliderListWrap + ' .js-slide-to-right').on('click', function()
@@ -111,11 +96,11 @@ function Slider(sliderListWrap, onDisplay, toElem)
         else
             currentShift++;
 
-        $('.js-list-wrap').on('swipeleft', function () {
+        $('.slider-list-wrap').on('swipeleft', function () {
             currentShift++;
         });
 
-        $('.js-list-wrap').on('swiperight', function () {
+        $('.slider-list-wrap').on('swiperight', function () {
             currentShift--;
         });
 
@@ -274,7 +259,7 @@ function SendFormAll()
             var userEmailForm = $('.js-user-email').val();
             var descriptionProject = $('.js-project-description').val();
 
-            var obj = {"userNameForm " : userNameForm, "userPhoneForm " : userPhoneForm, "userEmailForm " : userEmailForm, "descriptionProject " : descriptionProject,};
+            var obj = {"userNameForm" : userNameForm, "userPhoneForm" : userPhoneForm, "userEmailForm" : userEmailForm, "descriptionProject" : descriptionProject,};
             console.log(obj);
 
             $.ajax({

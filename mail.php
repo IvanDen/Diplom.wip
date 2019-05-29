@@ -13,7 +13,7 @@ echo $userPhone;
 
 $to      = 'denisko.I@mail.ru';
 $subject = 'New client';
-$message = 'User' . "$userName" . "\r\n" . 'User phone' . "$userPhone" . "\r\n" . 'User email' . "$userEmail" . "\r\n" . 'descriptionProject' . $descriptionProject;
+$message = 'User: ' . "$userName" . "\r\n" . 'User phone: ' . "$userPhone" . "\r\n" . 'User email: ' . "$userEmail" . "\r\n" . 'descriptionProject: ' . $descriptionProject;
 $headers = 'From: webbestteam@gmail.com' . "\r\n" .
     'Reply-To: webbestteam@gmail.com' . "\r\n" .
     'X-Mailer: PHP/' . phpversion();
