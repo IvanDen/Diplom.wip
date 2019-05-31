@@ -13,6 +13,10 @@ $(window).resize(function() {
 
 function Slider(sliderListWrap, onDisplay, toElem)
 {
+
+    var maxWight = 390;
+    var minWight = 200;
+
     //IE
     toElem = toElem === undefined ? -1 : toElem;
 
@@ -22,32 +26,37 @@ function Slider(sliderListWrap, onDisplay, toElem)
     console.log("count: " + count);
 
     var wrapWidth = $('.'+sliderListWrap+' .js-full-wrap').width();
+
     console.log("wrapWidth: " + wrapWidth);
 
     var marginRight = $('.'+sliderList+' > *').css('margin-right');
     var marginLeft = $('.'+sliderList+' > *').css('margin-left');
-
-    console.log('marginRight : ' + marginRight);
-    console.log('marginLeft : ' + marginLeft);
 
     marginRight = Number(marginRight.replace('px', ''));
     marginLeft = Number(marginLeft.replace('px', ''));
 
     var elemWidth = wrapWidth / onDisplay;
     console.log('1 elemWidth : ' + elemWidth);
-    while (elemWidth < 200)
+
+    while (elemWidth < minWight)
     {
         onDisplay--;
         elemWidth = wrapWidth / onDisplay;
     }
 
+    var globalWrapWidth = $('.'+sliderListWrap).width();
+    wrapWidth = globalWrapWidth;
+
+    console.log('globalWrapWidth: ' + globalWrapWidth);
     console.log("elemWidth: " + elemWidth);
 
     var sliderWidth = elemWidth * count;
     console.log("sliderWidth: " + sliderWidth);
 
+
     var maxShift = count - onDisplay;
-    console.log("maxShift: " + sliderWidth);
+    console.log("maxShift: " + maxShift);
+
 
     $('.'+sliderList+' > *').width(elemWidth - (marginRight + marginLeft));
 
@@ -69,7 +78,6 @@ function Slider(sliderListWrap, onDisplay, toElem)
     var pointsCount = 1 + count - onDisplay;
     console.log("pointsCount: " + pointsCount);
 
-
     $('.'+sliderListWrap).find('.js-points > *').remove();
     for (var i = 0; i < pointsCount; i++)
     {
@@ -79,32 +87,16 @@ function Slider(sliderListWrap, onDisplay, toElem)
     }
     $('.'+sliderListWrap).find('.js-points > *').eq(currentShift).addClass('active');
 
-
     //Сдвиг первоначальный
     $('.'+sliderList).css('margin-left', currentShift * -elemWidth - currentShift);
-    console.log('margin-left: ' + (currentShift * -elemWidth - currentShift));
+    console.log('------------------');
 
     $('.'+sliderListWrap+' .slider-list-wrap').width(wrapWidth);
 
-    $('.' + sliderListWrap + ' .js-slide-to-left, ' + '.' + sliderListWrap + ' .js-slide-to-right').off('click');
-    $('.' + sliderListWrap + ' .js-slide-to-left, ' + '.' + sliderListWrap + ' .js-slide-to-right').on('click', function()
+    var currentShift = $('.'+sliderList).attr('data-current');
+
+    function CheckCurrentShift()
     {
-        var currentShift = $('.'+sliderList).attr('data-current');
-
-        if ($(this).hasClass('js-slide-to-left'))
-            currentShift--;
-        else
-            currentShift++;
-
-        $('.slider-list-wrap').on('swipeleft', function () {
-            currentShift++;
-        });
-
-        $('.slider-list-wrap').on('swiperight', function () {
-            currentShift--;
-        });
-
-
         if (currentShift >= 0 && currentShift <= count - onDisplay)
         {
             $('.'+sliderList).eq(0).css('margin-left', currentShift * -elemWidth - currentShift);
@@ -124,11 +116,43 @@ function Slider(sliderListWrap, onDisplay, toElem)
                 $('.' + sliderListWrap + ' .js-slide-to-right').addClass('noactive');
             else
                 $('.' + sliderListWrap + ' .js-slide-to-right').removeClass('noactive');
-
-            //Саб слайдеры
-            // $('.'+sliderListWrap).find('.js-sub-slider-percents').css('margin-left', (currentShift * -100) + "%");
         }
+    }
+
+    $('.' + sliderListWrap + ' .js-slide-to-left, ' + '.' + sliderListWrap + ' .js-slide-to-right').off('click');
+    $('.' + sliderListWrap + ' .js-slide-to-left, ' + '.' + sliderListWrap + ' .js-slide-to-right').on('click', function()
+    {
+        currentShift = $('.'+sliderList).attr('data-current');
+
+        if ($(this).hasClass('js-slide-to-left'))
+            currentShift--;
+        else
+            currentShift++;
+
+        CheckCurrentShift();
     });
+
+    function TouchSwipe()
+    {
+        console.log('Swipe');
+        $('.js-full-wrap').off('swipeleft');
+        $('.js-full-wrap').on('swipeleft',  function(){
+
+            currentShift = $('.'+sliderList).attr('data-current');
+            currentShift++;
+            CheckCurrentShift();
+        });
+
+        $('.js-full-wrap').off('swiperight');
+        $('.js-full-wrap').on('swiperight', function() {
+
+            currentShift = $('.'+sliderList).attr('data-current');
+            currentShift--;
+            CheckCurrentShift();
+        });
+    }
+
+    TouchSwipe();
 
     $('.'+sliderListWrap).find('.js-points > *').click(function() {
         $('.js-points > *').removeClass('active');
@@ -163,7 +187,7 @@ function DropMenu()
         $(this).find('.js-menu-wrap').stop().slideDown(300)
     });
 
-    $('html').on('click', function (e) {
+    $('html').on('click touchstart', function (e) {
         if ($(e.target).parents('.js-menu').length == 0 && !$(e.target).hasClass('js-menu')) {
             $('.js-menu-wrap').stop().slideUp(300, function ()
             {
@@ -174,48 +198,34 @@ function DropMenu()
     });
 }
 
-// Cancels the scroll when highlighted popup
-/*
-function disableScroll() {
-    $('html, body').on('mousewheel', function () {
-        return false;
-    });
-}
-
-function enableScroll() {
-    $('html, body').off('mousewheel');
-}
-*/
-
-
 // customize popups
 
 function showPopup ()
 {
     $('.button').on('click', function () {
 
-        $('.popup-wrap').fadeIn(1000/*, disableScroll*/);
+        $('.popup-wrap').fadeIn(1000);
         $('.popup-wrap').animate({
         }, 400);
     });
 
     $('.js-call-back').on('click', function () {
 
-        $('.ask-call').fadeIn(1000/*, disableScroll*/);
+        $('.ask-call').fadeIn(1000);
         $('.ask-call').animate({
         }, 400);
     });
 
     $('.js-project').on('click', function () {
 
-        $('.order-project').fadeIn(1000/*, disableScroll*/);
+        $('.order-project').fadeIn(1000);
         $('.order-project').animate({
         }, 400);
     });
 
     $('.popup-bg, .js-close').on('mousedown', function (event) {
         if (event.target == this) {
-            $('.popup-wrap, .ask-call, .order-project').fadeOut(400/*, enableScroll*/);
+            $('.popup-wrap, .ask-call, .order-project').fadeOut(400);
             $('.popup-wrap').animate({
             }, 400);
         }
@@ -234,12 +244,10 @@ function InputActive()
         if(inputVal)
         {
             $(this).addClass('active');
-            // console.log('function InputActive() added active');
         }
         else
         {
             $(this).removeClass('active');
-            // console.log('function InputActive() romoved active');
         }
 
     });

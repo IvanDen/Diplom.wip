@@ -57,7 +57,9 @@ small {font: 16px 'roboto-regular'; color: #ffffff;}
 .form {width: 100%;}
 .form .input {width: 80%; height: 30px; border: 1px solid #999999; margin-top: 20px;}
 .form .input input {width: 100%; height: 100%; border: none; box-sizing: border-box; outline: none; padding-left: 25px;}
-.form .input input:hover, .form .input input:focus, .form textarea:hover, .form textarea:focus {border: 1px solid #FF2F96; color: #FF2F96;}
+input[type="text"] { -webkit-appearance: none; -moz-appearance: none; appearance: none;}
+input::-ms-clear {display: none;}
+.form .input input:hover, .form .input input:focus, .form textarea:hover, .form textarea:focus {border: 1px solid #FF2F96; border-radius: 0 !important; color: #FF2F96;}
 .input.error, textarea.error, .error > textarea {border-color: #FF2F96;}
 .form .checkbox {height: 17px; position: relative; flex-shrink: 0; margin-right: 9px; cursor: pointer; display: flex; align-items: center; margin-top: 20px;}
 .form .checkbox b {font: 16px 'roboto-regular'; color: #555555; font-weight: normal; margin-left: 40px; display: block;}
@@ -71,7 +73,7 @@ small {font: 16px 'roboto-regular'; color: #ffffff;}
 .form .checkbox:hover input + span {background-position-x: -17px;}
 .form p {margin: 20px 0 0;}
 .form .button {width: 50%; margin-top: 25px; float: right;}
-.form textarea {width: 100%; height: 50px; margin-top: 20px; outline: none;}
+.form textarea {width: 100%; border-radius: 0 !important; height: 50px; margin-top: 20px; outline: none;}
 .error-wrap {width: 100%;}
 .block-error {width: 100%; color: #FF282F; font: 14px 'roboto-regular'; padding: 10px; text-align: center; box-sizing: border-box;}
 

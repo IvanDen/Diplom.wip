@@ -1,6 +1,3 @@
-$(document).ready(function () {
-	Modals();
-});
 
 window.Collect = function(form)
 {
@@ -92,74 +89,6 @@ function EmailValidate(email)
     return pattern.test(email);
 };
 
-function Modals()
-{
-	this.speed = 300;
-	
-	$('.js-modal').each(function () {
-		$(this).css('transition', speed+"ms");
-		$(this).css('opacity', '0');
-		$(this).find('.js-modal-content').css('transition', speed+"ms");
-		$(this).find('.js-modal-content').css('transform', 'scale(0)');
-	});
-	
-	$('.js-close-modal').click(function() {
-		var modal = $(this).parents('.js-modal');
-		
-		modal.find('.js-modal-content').css('transition', speed+"ms").css('transform', 'scale(0)');
-		modal.css('transition', speed+"ms").css('opacity', '0');
-		
-		setTimeout(function () {
-			modal.hide();
-		}, speed);
-	});
-	
-	$('.js-open-modal').click(function() {
-		var modal = $($(this).attr('data-modal'));
-		
-		//Закрываем все модалы
-		$('.js-modal').fadeIn(100).hide();
-		$('.js-modal').find('.js-modal-content').stop().css('transform', 'scale(0)')
-		
-		//Открываем вызванный
-		setTimeout(function () {
-			modal.stop().show();
-		}, 30);
-		
-		setTimeout(function () {
-			modal.find('.js-modal-content').stop().css('transform', 'scale(1)');
-			modal.css('opacity', '1');
-		}, 60);
-	});
-	
-	$('.js-close-modal-no-child').click(function(e) {
-		if (e.target !== this)
-			return;
-		
-		var modal = $(this);
-		
-		if ($(this).hasClass('js-modal'))
-		{
-			modal.find('.js-modal-content').css('transition', speed+"ms").css('transform', 'scale(0)');
-			modal.css('transition', speed+"ms").css('opacity', '0');
-			
-			setTimeout(function () {
-				modal.hide();
-			}, speed);
-		}
-		else
-		{
-			modal = $(this).parents('.js-modal');
-			
-			modal.find('.js-modal-content').css('transition', speed+"ms").css('transform', 'scale(0)');
-			modal.css('transition', speed+"ms").css('opacity', '0');
-			
-			setTimeout(function () {
-				modal.hide();
-			}, speed);
-		}
-	});
-}
 
 window.PhoneNumbValidate = function ()
 {
