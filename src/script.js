@@ -23,11 +23,11 @@ function Slider(sliderListWrap, onDisplay, toElem)
     var sliderList = sliderListWrap+' .js-list';
 
     var count = $('.'+sliderList+' > *').length;
-    console.log("count: " + count);
+    // console.log("count: " + count);
 
     var wrapWidth = $('.'+sliderListWrap+' .js-full-wrap').width();
 
-    console.log("wrapWidth: " + wrapWidth);
+    // console.log("wrapWidth: " + wrapWidth);
 
     var marginRight = $('.'+sliderList+' > *').css('margin-right');
     var marginLeft = $('.'+sliderList+' > *').css('margin-left');
@@ -36,7 +36,7 @@ function Slider(sliderListWrap, onDisplay, toElem)
     marginLeft = Number(marginLeft.replace('px', ''));
 
     var elemWidth = wrapWidth / onDisplay;
-    console.log('1 elemWidth : ' + elemWidth);
+    // console.log('1 elemWidth : ' + elemWidth);
 
     while (elemWidth < minWight)
     {
@@ -47,15 +47,15 @@ function Slider(sliderListWrap, onDisplay, toElem)
     var globalWrapWidth = $('.'+sliderListWrap).width();
     wrapWidth = globalWrapWidth;
 
-    console.log('globalWrapWidth: ' + globalWrapWidth);
-    console.log("elemWidth: " + elemWidth);
+    // console.log('globalWrapWidth: ' + globalWrapWidth);
+    // console.log("elemWidth: " + elemWidth);
 
     var sliderWidth = elemWidth * count;
-    console.log("sliderWidth: " + sliderWidth);
+    // console.log("sliderWidth: " + sliderWidth);
 
 
     var maxShift = count - onDisplay;
-    console.log("maxShift: " + maxShift);
+    // console.log("maxShift: " + maxShift);
 
 
     $('.'+sliderList+' > *').width(elemWidth - (marginRight + marginLeft));
@@ -72,11 +72,11 @@ function Slider(sliderListWrap, onDisplay, toElem)
         currentShift = maxShift;
     }
 
-    console.log("currentShift: " + currentShift);
+    // console.log("currentShift: " + currentShift);
 
     //Обновляем количество points
     var pointsCount = 1 + count - onDisplay;
-    console.log("pointsCount: " + pointsCount);
+    // console.log("pointsCount: " + pointsCount);
 
     $('.'+sliderListWrap).find('.js-points > *').remove();
     for (var i = 0; i < pointsCount; i++)
@@ -89,7 +89,7 @@ function Slider(sliderListWrap, onDisplay, toElem)
 
     //Сдвиг первоначальный
     $('.'+sliderList).css('margin-left', currentShift * -elemWidth - currentShift);
-    console.log('------------------');
+    // console.log('------------------');
 
     $('.'+sliderListWrap+' .slider-list-wrap').width(wrapWidth);
 
@@ -134,7 +134,7 @@ function Slider(sliderListWrap, onDisplay, toElem)
 
     function TouchSwipe()
     {
-        console.log('Swipe');
+        // console.log('Swipe');
         $('.js-full-wrap').off('swipeleft');
         $('.js-full-wrap').on('swipeleft',  function(){
 
@@ -268,7 +268,7 @@ function SendFormAll()
             var descriptionProject = $('.js-project-description').val();
 
             var obj = {"userNameForm" : userNameForm, "userPhoneForm" : userPhoneForm, "userEmailForm" : userEmailForm, "descriptionProject" : descriptionProject,};
-            console.log(obj);
+            // console.log(obj);
 
             $.ajax({
                 url: 'mail.php',
@@ -276,7 +276,7 @@ function SendFormAll()
                 data: obj
             }).done(function(response)
             {
-                console.log('success: ' + response);
+                // console.log('success: ' + response);
             });
 
             $('.js-user-name1').val('');
