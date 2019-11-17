@@ -1,3 +1,184 @@
+/*function Slider(sliderListWrap, onDisplay, toElem)
+{
+    var maxWight = 228;
+    var minWight = 300;
+
+    $('.' + sliderListWrap).find('.js-list > div').css('margin-left', '10px');
+    $('.' + sliderListWrap).find('.js-list > div').css('margin-right', '10px');
+
+    //IE
+    toElem = toElem === undefined ? -1 : toElem;
+
+    var sliderList = sliderListWrap+' .js-list';
+
+    var marginRight = $('.'+sliderList+' > *').css('margin-right');
+    var marginLeft = $('.'+sliderList+' > *').css('margin-left');
+
+    /!* marginRight = Number(marginRight.replace('px', ''));
+     marginLeft = Number(marginLeft.replace('px', ''));*!/
+
+    marginRight = Number(parseInt(marginRight));
+    marginLeft = Number(parseInt(marginLeft));
+
+    /!* console.log ("marginRight= ",marginRight);
+     console.log ("marginLeft= ",marginLeft);*!/
+
+    var elemWidth = minWight + marginRight + marginLeft;
+
+    var count = $('.'+sliderList+' > *').length;
+    // console.log("elemWidth : " + elemWidth);
+
+    // var wrapWidth = $('.'+sliderListWrap+' .js-full-wrap').width();
+    var wrapWidth = elemWidth * onDisplay;
+
+    // console.log("wrapWidth: " + wrapWidth);
+
+    // var elemWidth = wrapWidth / onDisplay;
+
+    // console.log('1 elemWidth : ' + elemWidth);
+
+    while (elemWidth < minWight)
+    {
+        onDisplay--;
+        elemWidth = wrapWidth / onDisplay;
+    }
+
+    var globalWrapWidth = $('.'+sliderListWrap).width();
+    // wrapWidth = globalWrapWidth;
+
+    // console.log('globalWrapWidth: ' + globalWrapWidth);
+    // console.log("elemWidth: " + elemWidth);
+
+    var sliderWidth = elemWidth * count;
+    // console.log("sliderWidth: " + sliderWidth);
+
+
+    var maxShift = count - onDisplay;
+    // console.log("maxShift: " + maxShift);
+
+
+    $('.'+sliderList+' > *').width(elemWidth - (marginRight + marginLeft));
+
+    $('.'+sliderList).width(sliderWidth);
+
+    if (toElem != -1)
+        $('.'+sliderList).attr('data-current', toElem);
+
+    var currentShift = parseInt($('.'+sliderList).attr('data-current'));
+    if (currentShift > maxShift)
+    {
+        $('.'+sliderList).attr('data-current', maxShift);
+        currentShift = maxShift;
+    }
+
+    // console.log("currentShift: " + currentShift);
+
+    //Обновляем количество points
+    var pointsCount = 1 + count - onDisplay;
+    // console.log("pointsCount: " + pointsCount);
+
+    $('.'+sliderListWrap).find('.js-points > *').remove();
+    for (var i = 0; i < pointsCount; i++)
+    {
+        var pointTemplate = $('#js-point-template').clone();
+        pointTemplate.removeAttr('id');
+        $('.'+sliderListWrap).find('.js-points').append(pointTemplate);
+    }
+    $('.'+sliderListWrap).find('.js-points > *').eq(currentShift).addClass('active');
+
+    //Сдвиг первоначальный
+    $('.'+sliderList).css('margin-left', currentShift * -elemWidth);
+
+    // console.log('------------------');
+
+    $('.'+sliderListWrap+' .slider-list-wrap').width(wrapWidth);
+
+    var currentShift = $('.'+sliderList).attr('data-current');
+
+    function CheckCurrentShift()
+    {
+        if (currentShift >= 0 && currentShift <= count - onDisplay)
+        {
+            $('.'+sliderList).eq(0).css('margin-left', currentShift * -elemWidth);
+            // console.log("Сдвиг первоначальный ", (currentShift * (-elemWidth)));
+
+            $('.'+sliderList).attr('data-current', currentShift);
+
+            //Переключаем пойнты
+            $('.'+sliderListWrap).find('.js-points > *').removeClass('active');
+            $('.'+sliderListWrap).find('.js-points > *').eq(currentShift).addClass('active');
+
+            if (currentShift == 0)
+                $('.' + sliderListWrap + ' .js-slide-to-left').addClass('noactive');
+            else
+                $('.' + sliderListWrap + ' .js-slide-to-left').removeClass('noactive');
+
+            if (currentShift == count - onDisplay)
+                $('.' + sliderListWrap + ' .js-slide-to-right').addClass('noactive');
+            else
+                $('.' + sliderListWrap + ' .js-slide-to-right').removeClass('noactive');
+        }
+    }
+
+    $('.' + sliderListWrap + ' .js-slide-to-left, ' + '.' + sliderListWrap + ' .js-slide-to-right').off('click touchend');
+    $('.' + sliderListWrap + ' .js-slide-to-left, ' + '.' + sliderListWrap + ' .js-slide-to-right').on('click touchend', function()
+    {
+        currentShift = $('.'+sliderList).attr('data-current');
+
+        if ($(this).hasClass('js-slide-to-left'))
+            currentShift--;
+        else
+            currentShift++;
+
+        CheckCurrentShift();
+    });
+
+//-------Making an event for touchscreen devices-------
+    function TouchSwipe()
+    {
+        var swipeWrap = $("."+sliderListWrap).find('.js-full-wrap');
+        // console.log("swipeWrap ", swipeWrap);
+
+        swipeWrap.off('swipeleft');
+        swipeWrap.on('swipeleft',  function(){
+
+            currentShift = $('.'+sliderList).attr('data-current');
+            currentShift++;
+            CheckCurrentShift();
+        });
+
+        swipeWrap.off('swiperight');
+        swipeWrap.on('swiperight', function() {
+
+            currentShift = $('.'+sliderList).attr('data-current');
+            currentShift--;
+            CheckCurrentShift();
+        });
+    }
+
+    TouchSwipe();
+
+    $('.'+sliderListWrap).find('.js-points > *').click(function() {
+        $('.'+sliderListWrap).find('.js-points > *').removeClass('active');
+        $(this).addClass('active');
+
+        var currentShift = $(this).index();
+        $('.'+sliderList).eq(0).css('margin-left', currentShift * -elemWidth);
+
+        $('.'+sliderList).attr('data-current', currentShift);
+
+        if (currentShift == 0)
+            $('.' + sliderListWrap + ' .js-slide-to-left').addClass('noactive');
+        else
+            $('.' + sliderListWrap + ' .js-slide-to-left').removeClass('noactive');
+
+        if (currentShift == count - onDisplay)
+            $('.' + sliderListWrap + ' .js-slide-to-right').addClass('noactive');
+        else
+            $('.' + sliderListWrap + ' .js-slide-to-right').removeClass('noactive');
+
+    });
+}*/
 
 window.Collect = function(form)
 {

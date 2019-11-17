@@ -5,9 +5,11 @@
 		<title>Дениско Иван официальный сайт</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" type="text/css" href="src/styles.css" media="screen" />
+		<link rel="stylesheet" type="text/css" href="src/dist/css/datepicker.css" media="screen" />
 		<link rel="stylesheet" href="fonts/icon-fonts/css/font-awesome.min.css" media="screen" />
 		<script src="src/jQuery-3.3.1.js"></script>
 		<script src="src/jquery.detect_swipe.js"></script>
+		<script src="src/dist/js/datepicker.js"></script>
 		<script src="src/script.js"></script>
 		<script src="src/lib.js"></script>
 	</head>
@@ -36,9 +38,9 @@
 						<a href="#price">Стоимость</a>
 					</nav>
 					<div class="call">
-						<h4><a href="tel:+95555469081">+995-555-469-081</a></h4>
+						<h4><a href="tel:+79269386330">+7(926)-938-63-30</a></h4>
 						<div class="button empty js-call-back">Заказать звонок</div>
-						<div class="call-answer" onclick="window.open('tel:+995-555-469-081');"></div>
+						<div class="call-answer" onclick="window.open('tel:+79269386330');"></div>
 					</div>
 				</div>
 				<div class="name">
@@ -79,32 +81,44 @@
 					<a name="examples"></a>
 					<h2>Примеры моих работ</h2>
 					<div class="slider-wrap js-slider-wrap">
-						<img src="img/arrow.png" class="js-slide-to-left" alt="">
+						<img src="img/arrow.png" class="slide-button js-slide-to-left noactive" alt="">
 						<div class="slider-list-wrap js-full-wrap">
-							<div class="slider-list js-list" data-current="0">
-								<div>
-									<img src="img/img1.png" alt="">
-									<p class="medium">Сайт психолога Веры Антоновой</p>
-								</div>
-								<div>
-									<img src="img/img2.png" alt="">
-									<p class="medium">Сайт магазина детской одежды</p>
-								</div>
-								<div>
-									<img src="img/img3.png" alt="">
-									<p class="medium">Сайт магазина «Рыболов»</p>
-								</div>
-								<div>
-									<img src="img/news.png" alt="">
-									<p class="medium">Сайт новостей</p>
-								</div>
-								<div>
-									<img src="img/react-comments.png" alt="">
-									<p class="medium">Блок комментариев с использование фреймворков</p>
+							<div class="slider-works js-list-wrap">
+								<div class="slider-list js-list" data-current="0">
+									<div>
+										<a target="_blank" class="work-href" href="https://novokuzneck-nedvizhimost.ru/">
+											<img src="img/novokuzneck.jpg" alt="">
+											<span class="medium">Недвижимость в  Новокузнецке</span>
+										</a>
+									</div>
+									<div>
+										<a target="_blank"  class="work-href" href="http://cryptoo.bet/">
+											<img src="img/cryptoo.jpg" alt="">
+											<span class="medium">Сайт казино</span>
+										</a>
+									</div>
+									<div>
+										<a target="_blank"  class="work-href" href="http://213.166.70.37/">
+											<img src="img/volcano.jpg" alt="">
+											<span class="medium">Сайт казино</span>
+										</a>
+									</div>
+									<div>
+										<a target="_blank"  class="work-href" href="https://ivanden.github.io/SocialNetwork/">
+											<img src="img/reactapp.jpg" alt="">
+											<span class="medium">Приложение "социальная сеть" на React.js</span>
+										</a>
+									</div>
+									<div>
+										<a target="_blank"  class="work-href" href="https://ivanden.github.io/news-agency.wip/">
+											<img src="img/news.png" alt="">
+											<span class="medium">Лендинг главной страницы новостного агентства</span>
+										</a>
+									</div>
 								</div>
 							</div>
 						</div>
-						<img class="rotate js-slide-to-right" src="img/arrow.png" alt="">
+						<img class="rotate js-slide-to-right slide-button" src="img/arrow.png" alt="">
 						<div class="slider-points js-points">
 							<div class="active"></div>
 							<div></div>
@@ -112,7 +126,7 @@
 						</div>
 						<div id="js-point-template"></div>
 					</div>
-					<div class="button js-project">Заказать проект</div>
+					<div class="button order-project js-project">Заказать проект</div>
 				</section>
 			</div>
 			<div class="background gradient flex">
@@ -138,7 +152,7 @@
 				<div class="contacts">
 					<div class="phone">
 						<i class="fa fa-phone" aria-hidden="true"></i>
-						<span><a href="tel:+95555469081">+995-555-469-081</a></span>
+						<span><a href="tel:+79269386330">+7(926)-938-63-30</a></span>
 					</div>
 					<div class="post">
 						<i class="fa fa-envelope" aria-hidden="true"></i>
@@ -150,7 +164,6 @@
 					<div class="socials">
 						<a href="https://vk.com/id26262755" target="_blank" class="vk"></a>
 						<a href="https://www.facebook.com/ivan.denisko" target="_blank" class="fac"></a>
-						<a href="" class="twit"></a>
 						<a href="https://www.instagram.com/moscow_ivan_27rus/" target="_blank" class="inst"></a>
 					</div>
 				</div>
@@ -168,7 +181,7 @@
 						<div class="form js-form">
 							<div class="error-wrap js-wrap">
 								<div class="input js-error">
-									<input type="text" placeholder="Меня зовут" class="js-user-name1 js-required">
+									<input type="text" placeholder="Меня зовут" class="js-user-name1 js-required" data-position="right top">
 								</div>
 								<div class="block-error js-block-error" style="display: none;">Введите имя</div>
 							</div>

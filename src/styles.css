@@ -12,7 +12,7 @@ html, body {min-height: 100%; float: left; width: 100%; margin: 0; padding: 0;}
 body {overflow-x: hidden; display: flex; flex-direction: column; align-items: center; color: #ffffff; position: relative;}
 img {flex-shrink: 0; vertical-align: middle;}
 img, a {transition: 200ms;}
-a {text-decoration: none;}
+a {text-decoration: none; color: #000;}
 h1, h2, h3, h4, h5 {font-weight: normal; margin: 0;}
 p {margin-top: 0;}
 p:last-child {margin-bottom: 0;}
@@ -25,8 +25,8 @@ h3 {font: 45px 'roboto-bold'; color: #ffffff;}
 h4 {font: 25px 'roboto-bold'; color: #1f1f24;}
 h5 {font: 24px 'roboto-regular'; color: #8993ad;}
 
-header nav a {font: 16px 'roboto-regular'; color: #1f1f24;}
-header nav a:hover {color: #fc557c; text-decoration: underline;}
+header nav a {font: 16px 'roboto-regular'; color: #1f1f24; transition: .3s all;}
+header nav a:hover {color: #929292; text-decoration: underline;}
 footer nav a {font: 18px/2em 'roboto-regular'; color: #8993ad;}
 footer nav a:hover {opacity: 0.7;}
 
@@ -35,11 +35,11 @@ p.medium {font-family: 'roboto-medium';}
 p.small {font-size: 18px; color: #fff;}
 span {font: 25px 'roboto-regular'; color: #000000;}
 small {font: 16px 'roboto-regular'; color: #ffffff;}
-.fa {font-size: 18px !important; color: #fa0c8c; margin-right: 10px;}
+.fa {font-size: 18px !important; color: #171717; margin-right: 10px;}
 .fa.fa-phone {font-size: 22px !important;}
-
-.button {font: 18px 'roboto-regular'; color: #ffffff; background-color: #ff4e2e; padding: 20px; box-sizing: border-box; text-align: center;}
-.button.empty {font-size: 16px; color: #f53f4f; background-color: #fff;  padding: 12px 37px; border: 1px solid #f82370;}
+/*#171717 #bdbdbd font-#1f1f24*/
+.button {font: 18px 'roboto-regular'; color: #ffffff; background-color: #453a54; padding: 20px; box-sizing: border-box; text-align: center; transition: .3s all;}
+.button.empty {font-size: 16px; color: #1f1f24; background-color: #fff;  padding: 12px 37px; border: 1px solid #171717;}
 .button:hover {cursor: pointer; box-shadow: 0 11px 20px 0 #0000002b;}
 
 .popup-wrap {top: 0; left: 0; right: 0; bottom: 0; position: fixed; z-index: 50; width: 100%;}
@@ -48,7 +48,7 @@ small {font: 16px 'roboto-regular'; color: #ffffff;}
 .popup-wrap .popup-bg .popup img {position: absolute; top: 15px; right: 15px;}
 .popup-wrap .popup-bg .popup img:hover {cursor: pointer; opacity: 0.7;}
 
-.menu-popup {position: absolute; top: 40px; left: 0; padding: 20px; background: linear-gradient(to bottom, #ff8f5a, #ff2f96); display: none;}
+.menu-popup {position: absolute; top: 40px; left: 0; padding: 20px; background: linear-gradient(to top right, #171717, #bdbdbd); display: none;}
 .menu-popup nav {display: flex !important; flex-direction: column;}
 .menu-popup nav a {color: #fff; margin: 20px 0 0;}
 .menu-popup nav a:hover {color: #000;}
@@ -56,10 +56,10 @@ small {font: 16px 'roboto-regular'; color: #ffffff;}
 
 .form {width: 100%;}
 .form .input {width: 80%; height: 30px; border: 1px solid #999999; margin-top: 20px;}
-.form .input input {width: 100%; height: 100%; border: none; box-sizing: border-box; outline: none; padding-left: 25px;}
+.form .input input {width: 100%; height: 100%; border: 1px solid transparent; box-sizing: border-box; outline: none; padding-left: 25px; transition: .3s all;}
 input[type="text"] { -webkit-appearance: none; -moz-appearance: none; appearance: none;}
 input::-ms-clear {display: none;}
-.form .input input:hover, .form .input input:focus, .form textarea:hover, .form textarea:focus {border: 1px solid #FF2F96; border-radius: 0 !important; color: #FF2F96;}
+.form .input input:hover, .form .input input:focus, .form textarea:hover, .form textarea:focus {border: 1px solid #453a54; border-radius: 0 !important;}
 .input.error, textarea.error, .error > textarea {border-color: #FF2F96;}
 .form .checkbox {height: 17px; position: relative; flex-shrink: 0; margin-right: 9px; cursor: pointer; display: flex; align-items: center; margin-top: 20px;}
 .form .checkbox b {font: 16px 'roboto-regular'; color: #555555; font-weight: normal; margin-left: 40px; display: block;}
@@ -73,56 +73,63 @@ input::-ms-clear {display: none;}
 .form .checkbox:hover input + span {background-position-x: -17px;}
 .form p {margin: 20px 0 0;}
 .form .button {width: 50%; margin-top: 25px; float: right;}
-.form textarea {width: 100%; border-radius: 0 !important; height: 50px; margin-top: 20px; outline: none;}
+.form textarea {width: 100%; border-radius: 0 !important; height: 50px; margin-top: 20px; outline: none; transition: .3s all;}
 .error-wrap {width: 100%;}
-.block-error {width: 100%; color: #FF282F; font: 14px 'roboto-regular'; padding: 10px; text-align: center; box-sizing: border-box;}
+.block-error {width: 100%; color: #bdbdbd; font: 14px 'roboto-regular'; padding: 10px; text-align: center; box-sizing: border-box;}
 
 
 header, .content, .background, footer {display: flex; flex-direction: column; align-items: center; width: 100%;}
 section {width: 1170px;}
 
 header {background: #fbfbfb; min-height: 780px; position: relative;}
-header .decor {background: linear-gradient(to top right, #ff8f5a, #ff2f96); position: absolute; top: 150px; right: -150px; border-radius: 1000px 500px 30px 80px; width: 770px; height: 630px;}
+header .decor {background: linear-gradient(to top right, #171717, #bdbdbd); position: absolute; top: 150px; right: -150px; border-radius: 1000px 500px 30px 80px; width: 770px; height: 630px;}
 header .decor img {margin-left: 60px;}
 header section {flex-direction: column; z-index: 10;}
 header section .menu {width: 100%; display: flex; justify-content: space-between; align-items: center; margin-top: 45px;}
 header section .menu nav a {margin-right: 26px;}
 header section .menu .call {display: flex; align-items: center;}
 header section .menu .call h4 {margin-right: 50px;}
-header section .menu .call .call-answer {background: url("../img/call-answer.png") no-repeat center; width: 26px; height: 26px; cursor: pointer; display: none;}
+header section .menu .call .call-answer {background: url("../img/call-answer.png") no-repeat center; width: 26px; height: 26px; cursor: pointer; display: none; filter: brightness(50%) invert(50%);}
 header section .menu .call .call-answer:hover, header section .hidden-menu:hover {opacity: 0.8;}
 header section .name {margin-top: 210px; width: 62%;}
 header section .name h5 {margin-top: 15px;}
 header section .name .button {width: 37%; margin-top: 45px;}
-header section .hidden-menu {background: url("../img/menu.png") no-repeat center; width: 46px; height: 35px; cursor: pointer; display: none; position: relative;}
-img.absolute {position: absolute; top: 50%; left: 50%; animation: pulse 2400ms infinite;}
+header section .hidden-menu {background: url("../img/menu.jpg") no-repeat center; width: 46px; height: 35px; cursor: pointer; display: none; position: relative; transition: .3s all;}
+img.absolute {position: absolute; top: 50%; left: 50%; animation: pulse 2400ms infinite; filter: brightness(50%) invert(50%);}
 header img.absolute.img1 {top: 18%; left: 4%;}
 header img.absolute.img2 {top: 50%; left: 8%; animation: move 2400ms infinite;}
 header img.absolute.img3 {top: 90%; left: 25%;}
 header img.absolute.img4 {top: 70%; left: 50%;}
-header img.absolute.img5 {top: 20%; left: 35%; transform: rotate(-35deg); width: 65px; animation: move-left 2400ms infinite;}
+header img.absolute.img5 {top: 20%; left: 35%; width: 65px; animation: move-left 2400ms infinite;}
 
 .content section .skills {width: 100%; display: flex; flex-direction: column; align-items: center; margin-top: 90px;}
 .content section .skills .todo {width: 100%; display: flex; justify-content: space-between; margin-top: 90px;}
 .content section .skills .todo .todo-block {width: 22%; flex-direction: column; display: flex; align-items: center;}
+.content section .skills .todo .todo-block img{filter: brightness(50%) invert(50%);}
 .content section .skills .todo .todo-block__paragraph {margin-top: 20px; text-align: center;}
 .content section .skills .button {margin-top: 62px; padding: 20px 58px;}
 .content .background {background-color: #fbfbfb; width: 100%; padding: 90px 0; margin-top: 100px;}
-.content .background section .slider-wrap {margin-top: 100px; width: 100%; display: flex; justify-content: space-between; align-items: flex-start; position: relative;}
-.content .background section .slider-wrap > img {position: absolute; top: 120px; left: -30px; box-shadow: 0 0 20px 0 #00000040; border-radius: 55px;}
-.content .background section .slider-wrap > img.rotate {transform: rotate(180deg); left: auto; right: -30px;}
-.content .background section .slider-wrap > img:hover {cursor: pointer; opacity: 0.8;}
+.content .background section .slider-wrap {margin-top: 100px; width: 100%; display: flex; justify-content: space-between; align-items: flex-start; position: relative; z-index: 1;}
+.content .background section .slider-wrap .slide-button {position: absolute; z-index: 2; top: 120px; left: -30px; box-shadow: 0 0 20px 0 #00000040; border-radius: 55px;}
+.content .background section .slider-wrap .slide-button.rotate {transform: rotate(180deg); left: auto; right: -30px;}
+
+.content .background section .slider-wrap > .slide-button:hover {cursor: pointer; opacity: 0.5;}
+.slide-button.noactive {cursor: initial; opacity: 0.5;}
 .content .background section .slider-wrap .slider-list-wrap {width: 1170px; overflow: hidden;}
+.content .background section .slider-wrap .slider-works {width: 1170px; overflow: hidden;}
 .content .background section .slider-wrap .slider-list-wrap .list-wrap {overflow: hidden;}
 .content .background section .slider-wrap .slider-list-wrap .slider-list {float: left; transition: 500ms; display: flex;  justify-content: space-between; width: max-content;}
-.content .background section .slider-wrap .slider-list-wrap .slider-list div {text-align: center; width: 370px;margin: 0  10px;  vertical-align: middle; flex-shrink: 0;}
+.slider-list .work-href span.medium {display: block; min-height: 60px; font-family: 'roboto-medium';}
+.work-href {display: block; position: relative;}
+.work-href:after {position: absolute; background: linear-gradient(to top, rgb(69, 58, 84) 0%, rgba(0, 0, 0, 0.55) 70%);	left: 0; right: 0;	height: 0;	bottom: 0;	content: ""; z-index: -1; -webkit-transition: all 0.5s ease; -moz-transition: all 0.5s ease; -o-transition: all 0.5s ease;	transition: all 0.5s ease;}
+.work-href:hover:after {height: 100%; -webkit-transition: all 0.4s ease; -moz-transition: all 0.4s ease; -o-transition: all 0.4s ease; transition: all 0.4s ease; z-index: 1;}
+.content .background section .slider-wrap .slider-list-wrap .slider-list div {text-align: center; width: 370px;margin: 0  10px;  vertical-align: middle; flex-shrink: 0; user-select: none;}
 .content .background section .slider-wrap .slider-list-wrap .slider-list div img {width: 100%;}
 .content .background section .slider-wrap .slider-list-wrap div p {margin-top: 35px;}
 .content .background section .slider-wrap .slider-points {align-items: center; justify-content: center; width: 100%; position: absolute; bottom: -50px; left: 0; display: flex;}
 .content .background section .slider-wrap .slider-points div {width: 18px; height: 18px; border-radius: 10px; background: #ebebeb; cursor: pointer; margin: 0 15px;}
-.content .background section .slider-wrap .slider-points div.active {background: #ff4e2e;}
-.content .background section .button {margin-top: 90px;}
-.content .background.gradient {background: linear-gradient(to top right, #ff8f5a, #ff2f96); padding: 80px 0; margin: 0; position: relative;}
+.content .background section .slider-wrap .slider-points div.active {background: #453a54;}
+.content .background.gradient {background: linear-gradient(to top right, #171717, #bdbdbd); padding: 80px 0; margin: 0; position: relative;}
 .background.gradient img {filter: brightness(0%) invert(100%)}
 .background.gradient img.absolute.img1 {top: 18%; left: 4%;}
 .background.gradient img.absolute.img2 {top: 50%; left: 15%; animation: move 2400ms infinite;}
@@ -131,6 +138,8 @@ header img.absolute.img5 {top: 20%; left: 35%; transform: rotate(-35deg); width:
 .content .background.gradient section {padding: 0 110px; box-sizing: border-box;}
 .content .background.gradient section h3 {line-height: 1.4em;}
 .content .background.gradient section p {margin-top: 35px; width: 80%;}
+
+.button.order-project {margin-top: 100px;}
 
 footer {margin-top: 75px;}
 footer section {display: flex; justify-content: space-between; align-items: center;}
@@ -142,7 +151,7 @@ footer section .buttons .socials a.vk {width: 35px; height: 21px; background-pos
 footer section .buttons .socials a.fac {width: 16px; height: 28px; background-position: -40px 0;}
 footer section .buttons .socials a.twit {width: 29px; height: 24px; background-position: -59px -3px;}
 footer section .buttons .socials a.inst {width: 25px; height: 25px; background-position: -90px -3px;}
-footer section .buttons .socials a:hover {background: url(../img/sprite-color.png) no-repeat;}
+footer section .buttons .socials a:hover {background: url(../img/sprite-color.jpg) no-repeat;}
 footer section .buttons .socials a.vk:hover {background-position: 0 -8px;}
 footer section .buttons .socials a.fac:hover {background-position: -40px 0;}
 footer section .buttons .socials a.twit:hover {background-position: -59px -3px;}
@@ -266,6 +275,7 @@ header img.absolute.img2 {left: 3%;}
 	footer section .buttons {width: 100%; margin-top: 40px;}
 	footer section .buttons .socials {width: 70%;}
 	small {font-size: 12px;}
+	.menu-popup {width: 100vw; left: -20px;}
 }
 
 
